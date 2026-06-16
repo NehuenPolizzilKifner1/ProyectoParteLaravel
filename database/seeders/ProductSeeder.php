@@ -2,35 +2,39 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\User;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        $vendor = User::where(
+            'role',
+            'vendor'
+        )->first();
+
         Product::create([
-            'sku' => 'A001',
-            'name' => 'Ferrari 458 Italia',
-            'description' => 'Modelo más famoso de Ferrari',
-            'price' => 250000,
-            'stock' => 5,
-            'image' => 'imgs/ferrari.png',
-            'category' => 'Superdeportivo'
+            'name' => 'Porsche 911 Carrera GTS',
+            'potencia' => 480,
+            'price' => 160000,
+            'motor' => 'Boxer 6 Cilindros',
+            'image' => '/imgs/porsche911.webp',
+            'category' => 'Coches de Lujo',
+            'aceleracion' => 3.4,
+            'user_id' => $vendor->id
         ]);
 
         Product::create([
-            'sku' => 'A002',
-            'name' => 'Yamaha NMAX',
-            'description' => 'Modelo moderno de Yamaha',
-            'price' => 30000,
-            'stock' => 4,
-            'image' => 'imgs/motodeportiva.png',
-            'category' => 'Motocicleta'
+            'name' => 'Lamborghini Aventador',
+            'potencia' => 740,
+            'price' => 420000,
+            'motor' => 'V12 Atmosferico',
+            'image' => '/imgs/lambo.jpg',
+            'category' => 'Coches de Lujo',
+            'aceleracion' => 2.9,
+            'user_id' => $vendor->id
         ]);
     }
 }

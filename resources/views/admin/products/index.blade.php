@@ -10,10 +10,11 @@
 <table border="1">
 
 <tr>
-    <th>SKU</th>
     <th>Nombre</th>
+    <th>Motor</th>
+    <th>Potencia</th>
+    <th>Aceleración</th>
     <th>Precio</th>
-    <th>Stock</th>
     <th>Acciones</th>
 </tr>
 
@@ -21,13 +22,15 @@
 
 <tr>
 
-    <td>{{ $product->sku }}</td>
-
     <td>{{ $product->name }}</td>
 
-    <td>{{ $product->price }}</td>
+    <td>{{ $product->motor }}</td>
 
-    <td>{{ $product->stock }}</td>
+    <td>{{ $product->potencia }} CV</td>
+
+    <td>{{ $product->aceleracion }} s</td>
+
+    <td>{{ number_format($product->price, 0, ',', '.') }} €</td>
 
     <td>
         <a href="{{ route('admin.products.edit', $product) }}">

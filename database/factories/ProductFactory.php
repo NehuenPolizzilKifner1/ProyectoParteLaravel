@@ -13,30 +13,40 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku' => fake()->unique()->bothify('A###'),
 
             'name' => fake()->randomElement([
-                'Ferrari 458 Italia',
-                'Lamborghini Huracan',
+                'Porsche 911 Carrera GTS',
+                'Ferrari SF90',
                 'McLaren 720S',
-                'Bugatti Chiron'
+                'Lamborghini Revuelto'
             ]),
 
-            'description' => fake()->sentence(),
-
             'price' => fake()->numberBetween(
-                100000,
-                500000
+                120000,
+                600000
             ),
 
-            'stock' => fake()->numberBetween(
+            'image' => 'imgs/car.webp',
+
+            'motor' => fake()->randomElement([
+                'V8',
+                'V10',
+                'V12',
+                'Bóxer 6 Cilindros'
+            ]),
+
+            'potencia' => fake()->numberBetween(
+                400,
+                1000
+            ) . ' CV',
+
+            'aceleracion' => fake()->randomFloat(
                 1,
-                10
-            ),
+                2,
+                5
+            ) . 's',
 
-            'image' => 'car.jpg',
-
-            'category' => 'Deportivos'
+            'category' => 'Coches de Lujo'
         ];
     }
 }

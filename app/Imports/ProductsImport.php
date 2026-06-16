@@ -12,33 +12,33 @@ class ProductsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         if (
-            empty($row['sku']) ||
             empty($row['name']) ||
             !isset($row['price']) ||
-            !isset($row['stock'])
+            empty($row['motor']) ||
+            empty($row['potencia']) ||
+            empty($row['aceleracion'])
         ) {
             return null;
         }
 
-        if (
-            !is_numeric($row['price']) ||
-            !is_numeric($row['stock'])
-        ) {
+        if (!is_numeric($row['price'])) {
             return null;
         }
-        
-        Log::info('Producto importado: ' . $row['sku']);
+
+        Log::info(
+            'Vehículo importado: ' . $row['name']
+        );
 
         return Product::updateOrCreate(
             [
-                'sku' => $row['sku']
+                'name' => $row['name']
             ],
             [
-                'name' => $row['name'],
-                'description' => $row['description'] ?? '',
                 'price' => $row['price'],
-                'stock' => $row['stock'],
                 'image' => $row['image'] ?? null,
+                'motor' => $row['motor'],
+                'potencia' => $row['potencia'],
+                'aceleracion' => $row['aceleracion'],
                 'category' => $row['category'] ?? null,
             ]
         );

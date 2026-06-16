@@ -4,13 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductImportController;
 use App\Http\Controllers\Admin\ProductAdminController;
+use App\Models\Product;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $products = Product::latest()
+        ->take(5)
+        ->get();
+
+    return view('dashboard', compact('products'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
