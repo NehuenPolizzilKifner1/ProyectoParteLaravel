@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/tu-carpeta-backend
+            cd /home/ubuntu/projecte
             git pull origin main
             docker compose down
             docker compose up -d --build
