@@ -51,6 +51,49 @@ Per garantir la compatibilitat amb el Proxy Invers i les connexions segures:
 * Es processen correctament les capçaleres HTTP enviades pel Proxy Invers.
 * Es garanteix el funcionament correcte de les redireccions i URLs sota HTTPS.
 
+## 🌐 Desplegament HTTPS (Proxy Invers)
+
+L'aplicació es serveix sota **HTTPS** utilitzant **Nginx Proxy Manager (NPM)** com a punt d'entrada al servidor.
+
+### 🏗 Arquitectura
+
+El flux de les peticions és el següent:
+
+1. **Nginx Proxy Manager (NPM)** gestiona els certificats SSL generats amb **Let's Encrypt** i rep les connexions segures pel port **443**.
+2. Un cop validada la connexió HTTPS, NPM actua com a **Proxy Invers**.
+3. La petició es reenvia al contenidor **laravel-app**, que escolta internament pel port **80**.
+4. Laravel processa la petició i retorna la resposta a través del mateix flux.
+
+---
+
+### 🔒 Gestió de Seguretat (TrustProxies)
+
+Com que Laravel rep les peticions després que el trànsit HTTPS hagi estat gestionat pel Proxy Invers, és necessari indicar-li que confiï en les capçaleres enviades pel proxy.
+
+Per això s'ha configurat el fitxer `bootstrap/app.php` de la següent manera:
+
+```php id="r5epmv"
+$middleware->trustProxies(at: '*');
+```
+
+Aquesta configuració permet que Laravel:
+
+* Generi correctament les URLs amb el protocol `https://`.
+* Detecti adequadament les connexions segures.
+* Gestioni les sessions i cookies de forma segura.
+* Respecti les capçaleres enviades pel Proxy Invers.
+* Eviti problemes de redireccions o contingut mixt (*mixed content*).
+
+---
+
+### ✅ Beneficis
+
+* Certificats SSL gestionats automàticament amb Let's Encrypt.
+* Renovació automàtica dels certificats.
+* Separació clara entre la capa de seguretat (Nginx Proxy Manager) i l'aplicació (Laravel).
+* Comunicacions segures mitjançant HTTPS.
+* Compatibilitat completa amb desplegaments Docker darrere d'un Proxy Invers.
+
 ---
 
 ## 🚀 Tecnologies Utilitzades
