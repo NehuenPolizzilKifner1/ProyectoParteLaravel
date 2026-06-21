@@ -1,0 +1,240 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ecommerce Vehículos de Lujo API",
+        "description": "API REST para vehículos, usuarios y comentarios",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/admin/reviews": {
+            "get": {
+                "tags": [
+                    "Comentarios"
+                ],
+                "summary": "Listado de comentarios",
+                "operationId": "8c8127da5d69dbcf7a0fffd828fdb44b",
+                "responses": {
+                    "200": {
+                        "description": "Listado de comentarios"
+                    }
+                }
+            }
+        },
+        "/admin/reviews/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Comentarios"
+                ],
+                "summary": "Formulario de edición de comentario",
+                "operationId": "942d89dc39959d1e95c41016a975ad04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Formulario de edición"
+                    }
+                }
+            }
+        },
+        "/admin/reviews/{id}": {
+            "put": {
+                "tags": [
+                    "Comentarios"
+                ],
+                "summary": "Actualizar comentario",
+                "operationId": "235f522e867d4dfb017cda311d704fbf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Comentario actualizado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comentarios"
+                ],
+                "summary": "Eliminar comentario",
+                "operationId": "0c2ddc4999b0cfddeb42c4a29133b88e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Comentario eliminado"
+                    }
+                }
+            }
+        },
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listado de usuarios",
+                "operationId": "645cb2fc56c9cecb1ce6c515482805f2",
+                "responses": {
+                    "200": {
+                        "description": "Listado de usuarios"
+                    }
+                }
+            }
+        },
+        "/admin/users/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Formulario de edición de usuario",
+                "operationId": "400e9a5b587fe77a4918c2148eac853e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Formulario de edición"
+                    }
+                }
+            }
+        },
+        "/admin/users/{id}": {
+            "put": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Actualizar rol de usuario",
+                "operationId": "c5ae3a7bad5e7e951a8780cbc2f79ebe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Usuario actualizado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Eliminar usuario",
+                "operationId": "19aec53f36e08761c6bd98c888e88ba8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Usuario eliminado"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Listado de vehículos",
+                "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
+                "responses": {
+                    "200": {
+                        "description": "Listado obtenido correctamente"
+                    }
+                }
+            }
+        },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Obtener un vehículo",
+                "operationId": "7ab21ddb713501f3d4c2914892c02a21",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del vehículo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vehículo encontrado"
+                    },
+                    "404": {
+                        "description": "Vehículo no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Comentarios",
+            "description": "Comentarios"
+        },
+        {
+            "name": "Usuarios",
+            "description": "Usuarios"
+        },
+        {
+            "name": "Productos",
+            "description": "Productos"
+        }
+    ]
+}
